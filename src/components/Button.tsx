@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {FC} from 'react';
 import {
   StyleSheet,
   TouchableOpacity,
@@ -12,7 +12,7 @@ type ButtonProps = {
   onPress: (event: GestureResponderEvent) => void;
 };
 
-const Button: React.FC<ButtonProps> = ({text, color, onPress}) => (
+const Button: FC<ButtonProps> = ({text, color, onPress}) => (
   <TouchableOpacity
     activeOpacity={0.8}
     onPress={onPress}

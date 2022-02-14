@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {FC} from 'react';
 import {Platform, Text, StyleSheet} from 'react-native';
 
 const font = Platform.select({
@@ -6,7 +6,7 @@ const font = Platform.select({
   android: 'sans-serif-thin',
 });
 
-const Heading = () => <Text style={[styles.text, {fontFamily: font}]} />;
+const Heading: FC = () => <Text style={[styles.text, {fontFamily: font}]} />;
 
 const styles = StyleSheet.create({
   text: {

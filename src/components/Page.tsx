@@ -7,7 +7,7 @@ type PageProps = {
 
 const Page: React.FC<PageProps> = ({children}) => (
   <ImageBackground
-    source={require('../assets/background.jpg')}
+    source={require('../../assets/background.png')}
     style={[styles.background, {width: '100%', height: '100%'}]}>
     <SafeAreaView style={styles.safe}>{children}</SafeAreaView>
   </ImageBackground>
