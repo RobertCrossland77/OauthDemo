@@ -3,8 +3,9 @@ import {Text, StyleSheet} from 'react-native';
 
 const FormValue: FC = props => (
   <Text
+    selectable
     style={styles.text}
-    numberOfLines={10}
+    numberOfLines={20}
     ellipsizeMode="tail"
     {...props}
   />
@@ -13,8 +14,7 @@ const FormValue: FC = props => (
 const styles = StyleSheet.create({
   text: {
     fontSize: 14,
-    backgroundColor: 'lightslategray',
-    marginBottom: 20,
+    backgroundColor: '#778899',
     color: '#FFFD37',
   },
 });

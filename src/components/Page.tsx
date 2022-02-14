@@ -18,7 +18,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'white',
     paddingTop: 40,
-    paddingHorizontal: 10,
     paddingBottom: 10,
   },
   safe: {

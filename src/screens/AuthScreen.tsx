@@ -1,11 +1,4 @@
-import React, {useState, useCallback, useMemo, FC} from 'react';
-import {Alert} from 'react-native';
-import {
-  authorize,
-  refresh,
-  revoke,
-  prefetchConfiguration,
-} from 'react-native-app-auth';
+import React, {FC} from 'react';
 import {
   Page,
   Button,
@@ -15,112 +8,13 @@ import {
   FormValue,
   Heading,
 } from '../components';
-import AuthConfigs from '../configs/AuthConfigs';
+import useAuth from '../hooks/useAuth';
 
 // Lambda endpoint: https://oz739t0vgj.execute-api.us-west-2.amazonaws.com/hello
 
-type TokenState = {
-  hasLoggedInOnce?: boolean;
-  provider: string;
-  accessToken: string;
-  accessTokenExpirationDate: string;
-  refreshToken: string;
-  scopes?: Array<string>;
-};
-
 const AuthScreen: FC = () => {
-  const [authState, setAuthState] = useState<TokenState>({
-    hasLoggedInOnce: false,
-    provider: '',
-    accessToken: '',
-    accessTokenExpirationDate: '',
-    refreshToken: '',
-  });
-
-  React.useEffect(() => {
-    prefetchConfiguration({
-      warmAndPrefetchChrome: true,
-      connectionTimeoutSeconds: 5,
-      ...AuthConfigs.identityserver,
-    });
-  }, []);
-
-  const handleAuthorize = useCallback(
-    async provider => {
-      try {
-        const config = AuthConfigs[provider];
-        const newAuthState = await authorize({
-          ...config,
-          connectionTimeoutSeconds: 5,
-        });
-
-        setAuthState({
-          hasLoggedInOnce: true,
-          provider: provider,
-          ...newAuthState,
-        });
-      } catch (error) {
-        Alert.alert(
-          'Failed to log in',
-          error instanceof Error ? error.message : undefined,
-        );
-      }
-    },
-    [authState],
-  );
-
-  const handleRefresh = useCallback(async () => {
-    try {
-      const config = AuthConfigs[authState.provider];
-      const newAuthState = await refresh(config, {
-        refreshToken: authState.refreshToken,
-      });
-
-      setAuthState(current => ({
-        ...current,
-        ...newAuthState,
-        refreshToken: newAuthState.refreshToken || current.refreshToken,
-      }));
-    } catch (error) {
-      Alert.alert(
-        'Failed to refresh token',
-        error instanceof Error ? error.message : undefined,
-      );
-    }
-  }, [authState]);
-
-  const handleRevoke = useCallback(async () => {
-    try {
-      const config = AuthConfigs[authState.provider];
-
-      await revoke(config, {
-        tokenToRevoke: authState.accessToken,
-        sendClientId: true,
-      });
-
-      setAuthState({
-        provider: '',
-        accessToken: '',
-        accessTokenExpirationDate: '',
-        refreshToken: '',
-      });
-    } catch (error) {
-      Alert.alert(
-        'Failed to revoke token',
-        error instanceof Error ? error.message : undefined,
-      );
-    }
-  }, [authState]);
-
-  const showRevoke = useMemo(() => {
-    if (authState.accessToken) {
-      const config = AuthConfigs[authState.provider];
-
-      return config.issuer || config.serviceConfiguration?.revocationEndpoint;
-    }
-
-    return false;
-  }, [authState]);
+  const [authState, showRevoke, handleAuthorize, handleRefresh, handleRevoke] =
+    useAuth();
 
   return (
     <Page>
