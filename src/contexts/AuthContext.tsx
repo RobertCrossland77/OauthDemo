@@ -1,4 +1,4 @@
-import {useMemo, useState, useCallback} from 'react';
+import React, {FC, useMemo, useCallback, useState} from 'react';
 import {authorize, refresh, revoke} from 'react-native-app-auth';
 import {Alert} from 'react-native';
 import AuthConfigs from '../configs/AuthConfigs';
@@ -12,15 +12,30 @@ export type TokenState = {
   scopes?: Array<string>;
 };
 
-export type AuthState = [
-  TokenState, // Token State
-  string | false | undefined, // Show Revoke
-  (provider: any) => Promise<void>, // Authenticate
-  () => Promise<void>, // Refresh
-  () => Promise<void>, // Revoke
-];
+export type AuthState = {
+  authState: TokenState;
+  showRevoke: string | false | undefined;
+  handleAuthorize: (provider: any) => Promise<void>;
+  handleRefresh: () => Promise<void>;
+  handleRevoke: () => Promise<void>;
+};
 
-export default (): AuthState => {
+const AuthContext = React.createContext<AuthState>({
+  authState: {
+    hasLoggedInOnce: false,
+    provider: '',
+    accessToken: '',
+    accessTokenExpirationDate: '',
+    refreshToken: '',
+    scopes: [],
+  },
+  showRevoke: false,
+  handleAuthorize: (_: any) => Promise.resolve(),
+  handleRefresh: () => Promise.resolve(),
+  handleRevoke: () => Promise.resolve(),
+});
+
+export const AuthProvider: FC = ({children}) => {
   const [authState, setAuthState] = useState<TokenState>({
     hasLoggedInOnce: false,
     provider: '',
@@ -108,5 +123,18 @@ export default (): AuthState => {
     return false;
   }, [authState]);
 
-  return [authState, showRevoke, handleAuthorize, handleRefresh, handleRevoke];
+  return (
+    <AuthContext.Provider
+      value={{
+        authState,
+        showRevoke,
+        handleAuthorize,
+        handleRefresh,
+        handleRevoke,
+      }}>
+      {children}
+    </AuthContext.Provider>
+  );
 };
+
+export default AuthContext;
