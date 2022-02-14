@@ -3,7 +3,7 @@ import {authorize, refresh, revoke} from 'react-native-app-auth';
 import {Alert} from 'react-native';
 import AuthConfigs from '../configs/AuthConfigs';
 
-export type TokenState = {
+export type AuthState = {
   hasLoggedInOnce?: boolean;
   provider: string;
   accessToken: string;
@@ -12,15 +12,15 @@ export type TokenState = {
   scopes?: Array<string>;
 };
 
-export type AuthState = {
-  authState: TokenState;
+export type AuthContextProps = {
+  authState: AuthState;
   showRevoke: string | false | undefined;
   handleAuthorize: (provider: any) => Promise<void>;
   handleRefresh: () => Promise<void>;
   handleRevoke: () => Promise<void>;
 };
 
-const AuthContext = React.createContext<AuthState>({
+const AuthContext = React.createContext<AuthContextProps>({
   authState: {
     hasLoggedInOnce: false,
     provider: '',
@@ -36,7 +36,7 @@ const AuthContext = React.createContext<AuthState>({
 });
 
 export const AuthProvider: FC = ({children}) => {
-  const [authState, setAuthState] = useState<TokenState>({
+  const [authState, setAuthState] = useState<AuthState>({
     hasLoggedInOnce: false,
     provider: '',
     accessToken: '',
