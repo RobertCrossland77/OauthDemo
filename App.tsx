@@ -18,32 +18,6 @@ import {
 } from './components';
 
 const configs: Record<string, AuthConfiguration> = {
-  identityserver: {
-    issuer: 'https://demo.identityserver.io',
-    clientId: 'interactive.public',
-    redirectUrl: 'io.identityserver.demo:/oauthredirect',
-    additionalParameters: {},
-    scopes: ['openid', 'profile', 'email', 'offline_access'],
-
-    serviceConfiguration: {
-      authorizationEndpoint: 'https://demo.identityserver.io/connect/authorize',
-      tokenEndpoint: 'https://demo.identityserver.io/connect/token',
-      revocationEndpoint: 'https://demo.identityserver.io/connect/revoke',
-    },
-  },
-  B2C: {
-    issuer: 'https://demo.identityserver.io',
-    clientId: 'interactive.public',
-    redirectUrl: 'io.identityserver.demo:/oauthredirect',
-    additionalParameters: {},
-    scopes: ['openid', 'profile', 'email', 'offline_access'],
-
-    serviceConfiguration: {
-      authorizationEndpoint: 'https://demo.identityserver.io/connect/authorize',
-      tokenEndpoint: 'https://demo.identityserver.io/connect/token',
-      revocationEndpoint: 'https://demo.identityserver.io/connect/revoke',
-    },
-  },
   okta: {
     issuer: 'https://dev-27558975.okta.com/oauth2/default',
     clientId: '0oa3vrk1o6uDlqoyb5d7',
@@ -189,21 +163,11 @@ export default function App() {
       <ButtonContainer>
         {!authState.accessToken ? (
           <>
-            {/* <Button
-              onPress={() => handleAuthorize('identityserver')}
-              text="Authorize IdentityServer"
-              color="#DA2536"
-            /> */}
             <Button
               onPress={() => handleAuthorize('okta')}
               text="Authorize Okta"
               color="#90DA25"
             />
-            {/* <Button
-              onPress={() => handleAuthorize('b2c')}
-              text="Authorize Azure B2C"
-              color="#DA2536"
-            /> */}
           </>
         ) : (
           <Button
