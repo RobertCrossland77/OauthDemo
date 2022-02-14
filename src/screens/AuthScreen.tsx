@@ -3,12 +3,7 @@ import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import React, {FC, useContext, useEffect} from 'react';
 import {RootStackParamList} from '../../RootStackParamsList';
 import {Page, Button, ButtonContainer} from '../components';
-import AuthContext, {
-  AuthContextProps,
-  AuthState,
-} from '../contexts/AuthContext';
-
-// Lambda endpoint: https://oz739t0vgj.execute-api.us-west-2.amazonaws.com/hello
+import AuthContext, {AuthContextProps} from '../contexts/AuthContext';
 
 type AuthScreenProp = NativeStackNavigationProp<RootStackParamList, 'Auth'>;
 
