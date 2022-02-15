@@ -48,8 +48,6 @@ const LambdaScreen: FC = () => {
         <FormValue>{accessTokenExpirationDate}</FormValue>
         <FormLabel>Refresh Token</FormLabel>
         <FormValue>{refreshToken}</FormValue>
-        <FormLabel>Scopes</FormLabel>
-        <FormValue>{scopes?.join(', ')}</FormValue>
       </Form>
       <Heading>{hasLoggedInOnce ? 'Goodbye.' : 'Hello, stranger.'}</Heading>
 
