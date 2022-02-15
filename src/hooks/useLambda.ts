@@ -13,9 +13,6 @@ export default (): [(token: string) => Promise<void>, any[], string] => {
         },
       });
 
-      console.log('about to have a response');
-      console.log(response);
-
       setResults(response.data);
       setErrorMessage('');
     } catch (e) {

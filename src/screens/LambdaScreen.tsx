@@ -24,7 +24,6 @@ const LambdaScreen: FC = () => {
     accessToken,
     accessTokenExpirationDate,
     refreshToken,
-    scopes,
     hasLoggedInOnce,
   } = authState;
 
@@ -34,7 +33,6 @@ const LambdaScreen: FC = () => {
       accessToken === undefined ||
       accessToken === ''
     ) {
-      console.log(`definitely navigating ${accessToken}`);
       navigation.navigate('Auth');
     }
   }, [authState]);

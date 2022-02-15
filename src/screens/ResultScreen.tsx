@@ -17,7 +17,7 @@ type ResultScreenProp = NativeStackNavigationProp<RootStackParamList, 'Result'>;
 
 const ResultScreen: FC = () => {
   const navigation = useNavigation<ResultScreenProp>();
-  const [sayHello, results, errorMessage] = useLambda();
+  const [sayHello, results, _] = useLambda();
   const {authState} = useContext(AuthContext);
   const {accessToken} = authState;
 
