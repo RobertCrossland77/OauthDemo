@@ -6,7 +6,13 @@ const AuthConfigs: Record<string, AuthConfiguration> = {
     clientId: '0oa3vrk1o6uDlqoyb5d7',
     redirectUrl: 'com.okta.dev-27558975:/callback',
     additionalParameters: {},
-    scopes: ['openid', 'profile', 'email', 'offline_access'],
+    scopes: [
+      'openid',
+      'profile',
+      'email',
+      'offline_access',
+      'heartland_lambda',
+    ],
 
     serviceConfiguration: {
       authorizationEndpoint:

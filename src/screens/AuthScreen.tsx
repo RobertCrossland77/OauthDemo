@@ -18,7 +18,6 @@ const AuthScreen: FC<AuthScreenProp> = () => {
       authState.accessToken !== undefined &&
       authState.accessToken !== ''
     ) {
-      console.log(`navigating ${authState.accessToken}`);
       navigation.navigate('Lambda');
     }
   }, [authState]);

@@ -13,14 +13,13 @@ import {
 } from '../components';
 import AuthContext from '../contexts/AuthContext';
 
-// Lambda endpoint: https://oz739t0vgj.execute-api.us-west-2.amazonaws.com/hello
-
 type LambdaScreenProp = NativeStackNavigationProp<RootStackParamList, 'Lambda'>;
 
 const LambdaScreen: FC = () => {
   const navigation = useNavigation<LambdaScreenProp>();
   const {authState, handleRefresh, handleRevoke, showRevoke} =
     useContext(AuthContext);
+
   const {
     accessToken,
     accessTokenExpirationDate,
@@ -56,7 +55,7 @@ const LambdaScreen: FC = () => {
 
       <ButtonContainer>
         <Button
-          onPress={() => console.log('hello worlds')}
+          onPress={() => navigation.navigate('Result')}
           text="Hit Lambda"
           color="#7D24CB"
         />

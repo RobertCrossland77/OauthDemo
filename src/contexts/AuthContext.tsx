@@ -53,7 +53,7 @@ export const AuthProvider: FC = ({children}) => {
           connectionTimeoutSeconds: 5,
         });
 
-        console.log(newAuthState);
+        //console.log(`New Auth State: ${JSON.stringify(newAuthState)}`);
 
         setAuthState({
           hasLoggedInOnce: true,
