@@ -6,10 +6,10 @@
 	<array>
 		<dict>
 			<key>CFBundleURLName</key>
-			<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+			<string>org.reactjs.native.example.OauthDemo</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.okta.dev-27558975</string>
+				<string>msauth.org.reactjs.native.example.OauthDemo</string>
 			</array>
 		</dict>
 	</array>

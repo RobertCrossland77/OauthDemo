@@ -26,8 +26,27 @@ const AuthScreen: FC<AuthScreenProp> = () => {
     <Page>
       <ButtonContainer>
         <Button
-          onPress={() => handleAuthorize('okta')}
-          text="Authorize Okta"
+          onPress={() => {
+            console.log('clicked');
+            handleAuthorize('AAD');
+          }}
+          text="Authorize AAD"
+          color="#90DA25"
+        />
+        <Button
+          onPress={() => {
+            console.log('clicked');
+            handleAuthorize('B2c');
+          }}
+          text="Authorize B2c"
+          color="#90DA25"
+        />
+        <Button
+          onPress={() => {
+            console.log('clicked');
+            handleAuthorize('B2c2');
+          }}
+          text="Authorize B2c2"
           color="#90DA25"
         />
       </ButtonContainer>
